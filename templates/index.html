@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spam Email Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">📧 Spam Email Classifier</div>
+
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#classifier">Classify</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </nav>
+
+    <!-- LANDING PAGE -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Detect Spam Emails<br>with Machine Learning</h1>
+
+            <p>
+                This project uses Machine Learning to classify
+                whether an email is SPAM or NOT SPAM instantly.
+            </p>
+
+            <a href="#classifier">
+                <button class="hero-btn">Try Now</button>
+            </a>
+        </div>
+
+        <div class="hero-image">
+            <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="email image">
+        </div>
+    </section>
+
+    <!-- CLASSIFIER SECTION -->
+    <section class="classifier-section" id="classifier">
+
+        <div class="card">
+
+            <h2>Classify an Email</h2>
+
+            <p>
+                Enter the email content below and click on classify.
+            </p>
+
+            <form method="POST">
+
+                <textarea
+                    name="message"
+                    rows="10"
+                    placeholder="Enter email content here..."
+                >{{ message }}</textarea>
+
+                <button type="submit">
+                    Classify Email
+                </button>
+
+            </form>
+
+            {% if prediction %}
+
+            <div class="result-box {% if prediction == 'SPAM' %}spam{% else %}ham{% endif %}">
+
+                <h1>{{ prediction }}</h1>
+
+                <p>
+                    Confidence Score
+                </p>
+
+                <h2>{{ confidence }}%</h2>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </section>
+
+</body>
+</html>
